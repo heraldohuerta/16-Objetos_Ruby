@@ -128,10 +128,6 @@ class Student
       @name = name
       @notas = notas
   end
-
-    def sum1_notas
-      @notas = @notas.map { |v| v+=1 }
-    end
 end
 
 nombres = %w(Alicia Javier Camila Francisco Pablo Josefina)
@@ -163,10 +159,8 @@ puts "\n\n"
 # 4. Modificar la iteración para asignar notas incrementales de 1 en adelante.
 puts "# 4. Modificar la iteración para asignar notas incrementales de 1 en adelante.***************************************************************"
 objetos_alumnos  = []
-objetos_alumnos = nombres.map{ |nom| Student.new(nom,notas.sample(10))}
-print objetos_alumnos
-puts "\n\n"
-objetos_alumnos.each{ |obj| obj.sum1_notas}
+notas_en_aumento = 0
+objetos_alumnos = nombres.map{ |nom| notas_en_aumento+=1 ; Student.new(nom,notas_en_aumento) }
 print objetos_alumnos
 puts "\n\n"
 
@@ -202,6 +196,7 @@ puntos_arr = []
   puntos_arr << Punto.new(puntos.sample, puntos.sample)
 end
 print puntos_arr
+puts "\n\n"
 
 
 ###############################################################
@@ -216,6 +211,8 @@ class MyPet
       puts @name + '  nace  '
     end
 
+
+#####SE AGREAGAR ESTE METODO
     def walk
       puts 'Haces caminar a ' + @name + '.'
       @satisfied -= 2
@@ -223,6 +220,7 @@ class MyPet
       timeLapse
     end
 
+#####SE AGREAGAR ESTE METODO
     def eat
       puts "#{@name} Esta comiendo"
       @satisfied += 2
@@ -230,7 +228,9 @@ class MyPet
       timeLapse
     end
 
+#####SE AGREAGAR ESTE METODO
     def sleep
+      @sleep = true    #SE INICIALIZA VARIABLE SLEEP a TRUE
       puts "#{@name} Esta Durmiendo"
       @satisfied -= 2
       @fullIntestine  -= 2
@@ -270,24 +270,27 @@ class MyPet
       end
     end
 
+#####SE AGREAGAR ESTE METODO
     def hungry?
-       @satisfied < 3 ? true : false
+       @satisfied <=2 ? true : false
     end
-
+#####SE AGREAGAR ESTE METODO
     def needToGo?
-       @fullIntestine  > 7 ? true : false
+       @fullIntestine >= 6 ? true : false
     end
 end
 
+
+puts "******************************************************************"
+puts "**************************MASCOTA VIRTUAL*************************"
+puts "******************************************************************"
+puts "\n\n\n"
 sw = true
 mascota = MyPet.new 'PERRO'
 while sw
-  puts "******************************************************************"
-  puts "**************************MASCOTA VIRTUAL*************************"
-  puts "******************************************************************"
   puts "\n\n\n"
 
-  puts "Ingres las siguietes opciones para poder jugar"
+  puts "Ingresar las siguietes opciones para poder jugar"
   puts "caminar"
   puts "dormir"
   puts "comer"
