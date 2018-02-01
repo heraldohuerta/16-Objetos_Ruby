@@ -214,17 +214,19 @@ class MyPet
 
 #####SE AGREAGAR ESTE METODO
     def walk
+      @sleep = false
       puts 'Haces caminar a ' + @name + '.'
-      @satisfied -= 2
-      @fullIntestine  = 2
+       @satisfied -= 1
+      @fullIntestine  += 1
       timeLapse
     end
 
 #####SE AGREAGAR ESTE METODO
     def eat
+        @sleep = false
       puts "#{@name} Esta comiendo"
-      @satisfied += 2
-      @fullIntestine  += 2
+      @satisfied = 10
+      @fullIntestine  += 1
       timeLapse
     end
 
@@ -232,12 +234,25 @@ class MyPet
     def sleep
       @sleep = true    #SE INICIALIZA VARIABLE SLEEP a TRUE
       puts "#{@name} Esta Durmiendo"
-      @satisfied -= 2
-      @fullIntestine  += 2
+       @satisfied -= 1
+      @fullIntestine  += 1
+      timeLapse
+    end
+
+
+    def wc
+      @sleep = false
+      puts "#{@name} Ir al Baño"
+       @satisfied -= 1
+      @fullIntestine  = 0
       timeLapse
     end
 
   def timeLapse
+     puts "Nivel de hambre #{@satisfied}"
+     puts "Nivel de Necesidad Instentino #{ @fullIntestine }"
+     puts "Estado de Dormir #{ @sleep }"
+
       if @satisfied > 0
         #  Mueve el alimento del estomago al intestino.
         @satisfied      = @satisfied      - 1
@@ -250,16 +265,19 @@ class MyPet
         puts '¡' + @name + ' esta hambriento!  En su desesperacion, ¡Murio de Hambre!'
         exit  #  Sale del programa.
       end
-      if @fullIntestine  >= 10
+
+      if @fullIntestine  >= 8
         @fullIntestine  = 0
-        puts '¡Uy!  ' + @name + ' tuvo un accidente...'
+        puts '¡Uy!  ' + @name + ' tendra un  accidente...'
       end
+
       if hungry?
         if @sleep
           @sleep = false
           puts '¡Se despierta de repente!'
         end
         puts 'El estomago de ' + @name + 'retumba...'
+
       end
       if needToGo?
         if @sleep
@@ -294,6 +312,7 @@ while sw
   puts "caminar"
   puts "dormir"
   puts "comer"
+  puts "baño"
   accion = gets.chomp
   case accion
   when 'caminar'
@@ -302,6 +321,8 @@ while sw
     mascota.sleep
   when 'comer'
     mascota.eat
+  when 'baño'
+    mascota.wc
   end
 end
 # Genera el método comer considerando que llenara su panza y pasara el tiempo.
