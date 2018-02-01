@@ -233,7 +233,7 @@ class MyPet
       @sleep = true    #SE INICIALIZA VARIABLE SLEEP a TRUE
       puts "#{@name} Esta Durmiendo"
       @satisfied -= 2
-      @fullIntestine  -= 2
+      @fullIntestine  += 2
       timeLapse
     end
 
@@ -276,7 +276,7 @@ class MyPet
     end
 #####SE AGREAGAR ESTE METODO
     def needToGo?
-       @fullIntestine >= 6 ? true : false
+       @fullIntestine == 10
     end
 end
 
